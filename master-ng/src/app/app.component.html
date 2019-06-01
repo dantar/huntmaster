@@ -8,3 +8,4 @@
 <p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
 <div app-view-rule *ngFor="let rule of rules" [rule]="rule"></div>
 <button pButton label="Rule+" (click)="addRule()" ></button>
+<button pButton label="Save game" (click)="saveGame()" ></button>

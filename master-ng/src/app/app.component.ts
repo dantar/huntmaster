@@ -1,6 +1,7 @@
 import { HuntRules, HuntTrigger } from './models/hunt';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-root',
@@ -34,4 +35,10 @@ export class AppComponent implements OnInit {
     };
     reader.readAsText(event.files[0]);
   }
+
+  saveGame() {
+    const blob = new Blob([JSON.stringify(this.rules)], {type: 'text/json;charset=utf-8'});
+    saveAs(blob, 'game.json');
+  }
+
 }
