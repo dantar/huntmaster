@@ -4,5 +4,5 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<app-view-rule *ngFor="let rule of rules"></app-view-rule>
+<div app-view-rule *ngFor="let rule of rules" [rule]="rule"></div>
 <button pButton label="Rule+" (click)="addRule()" ></button>

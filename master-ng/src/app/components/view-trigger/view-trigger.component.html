@@ -1,0 +1,6 @@
+<div (click)="opTrigger.toggle($event, vTrigger)">Trigger: <span #vTrigger>{{trigger.code}}</span></div>
+<p-overlayPanel #opTrigger>
+  <div *ngFor="let code of triggers">
+    <p-radioButton name="trigger" value="{{code}}" [label]="code" [(ngModel)]="trigger.code"></p-radioButton>
+  </div>
+</p-overlayPanel>

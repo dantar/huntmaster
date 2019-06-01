@@ -1,4 +1,4 @@
-import { HuntRules } from './models/hunt';
+import { HuntRules, HuntTrigger } from './models/hunt';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   title = 'master-ng';
 
   rules: HuntRules[];
@@ -16,7 +17,10 @@ export class AppComponent implements OnInit {
   }
 
   addRule(type: string) {
-    this.rules.push(new HuntRules());
+    this.rules.push({
+      trigger: {type: 'trigger', code: 'click'},
+      effect: {type: 'consequence', code: 'message'},
+    });
   }
 
 }

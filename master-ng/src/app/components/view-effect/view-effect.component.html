@@ -1,0 +1,6 @@
+<div (click)="opEffect.toggle($event, vEffect)">Effect: <span #vEffect>{{effect.code}}</span></div>
+<p-overlayPanel #opEffect>
+  <div *ngFor="let code of effects">
+    <p-radioButton name="effect" value="{{code}}" [label]="code" [(ngModel)]="effect.code"></p-radioButton>
+  </div>
+</p-overlayPanel>
