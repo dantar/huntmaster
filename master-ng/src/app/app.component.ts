@@ -1,5 +1,5 @@
 import { HuntRules, HuntTrigger } from './models/hunt';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 
 @Component({
@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
 
   rules: HuntRules[];
 
+  @ViewChild('upload') upload: FileUpload;
+
   ngOnInit(): void {
     this.rules = [];
   }
@@ -24,11 +26,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  loadJsonGame(upload: FileUpload, event: any) {
+  loadJsonGame(event: any) {
     const reader = new FileReader();
     reader.onload = (e) => {
       this.rules = JSON.parse(reader.result as string);
-      upload.clear();
+      this.upload.clear();
     };
     reader.readAsText(event.files[0]);
   }

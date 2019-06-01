@@ -5,8 +5,6 @@
   </h1>
 </div>
 
-<!-- <p-fileUpload name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUpload($event)"></p-fileUpload> -->
-<p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame(upload, $event)"></p-fileUpload>
-
+<p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
 <div app-view-rule *ngFor="let rule of rules" [rule]="rule"></div>
 <button pButton label="Rule+" (click)="addRule()" ></button>
