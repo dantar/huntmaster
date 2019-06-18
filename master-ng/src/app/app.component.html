@@ -7,23 +7,23 @@
 
 <div>
   <p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
-  <input type="text" pInputText [(ngModel)]="rulefilter" />
-  <button pButton label="Rule+" (click)="addRule()" ></button>
+  <input type="text" pInputText [(ngModel)]="game.rulefilter" />
+  <button pButton label="Rule+" (click)="game.addRule()" ></button>
   <button pButton label="Save game" (click)="saveGame()" ></button>
 </div>
 
-<ng-container *ngFor="let rule of rules; let idx = index">
-  <div *ngIf="filterrule(rule)" >
+<ng-container *ngFor="let rule of game.rules; let idx = index">
+  <div *ngIf="game.filterrule(rule)" >
     <div class="actionpanel">
       <div class="actions">
-        <fa size="2" name="arrow-circle-up" (click)="moveUpRule(rule)"></fa>
-        <fa size="2" name="arrow-circle-down" (click)="moveDownRule(rule)"></fa>
-        <fa size="2" name="copy" (click)="copyRule(rule)"></fa>
-        <fa size="2" name="scissors" (click)="cutRule(rule)"></fa>
-        <fa size="2" name="trash" (click)="trashRule(rule)"></fa>
-        <fa size="2" name="paste" *ngIf="clipboard" (click)="pasteRule(rule)"></fa>
-        <fa size="2" name="unlock-alt" *ngIf="pinned.indexOf(rule) === -1" (click)="pinned.push(rule)"></fa>
-        <fa size="2" name="lock" *ngIf="pinned.indexOf(rule) > -1" (click)="pinned.splice(pinned.indexOf(rule), 1)"></fa>
+        <fa size="2" name="arrow-circle-up" (click)="game.moveUpRule(rule)"></fa>
+        <fa size="2" name="arrow-circle-down" (click)="game.moveDownRule(rule)"></fa>
+        <fa size="2" name="copy" (click)="game.copyRule(rule)"></fa>
+        <fa size="2" name="scissors" (click)="game.cutRule(rule)"></fa>
+        <fa size="2" name="trash" (click)="game.trashRule(rule)"></fa>
+        <fa size="2" name="paste" *ngIf="game.clipboard" (click)="game.pasteRule(rule)"></fa>
+        <fa size="2" name="unlock-alt" *ngIf="game.pinned.indexOf(rule) === -1" (click)="game.pinned.push(rule)"></fa>
+        <fa size="2" name="lock" *ngIf="game.pinned.indexOf(rule) > -1" (click)="game.pinned.splice(pinned.indexOf(rule), 1)"></fa>
       </div>
     </div>
     <div app-view-rule [rule]="rule"></div>

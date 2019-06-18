@@ -18,6 +18,7 @@ import { ViewRuleComponent } from './components/view-rule/view-rule.component';
 import { ViewTriggerComponent } from './components/view-trigger/view-trigger.component';
 import { ViewEffectComponent } from './components/view-effect/view-effect.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { HttpClientModule } from '@angular/common/http';
     FieldsetModule,
     Angular2FontawesomeModule,
   ],
-  providers: [],
+  providers: [
+    GameService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
