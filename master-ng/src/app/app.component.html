@@ -5,7 +5,10 @@
   </h1>
 </div>
 
+<input type="text" pInputText [(ngModel)]="rulefilter" />
 <p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
-<div app-view-rule *ngFor="let rule of rules" [rule]="rule"></div>
+<ng-container *ngFor="let rule of rules">
+  <div app-view-rule *ngIf="filterrule(rule)" [rule]="rule"></div>
+</ng-container>
 <button pButton label="Rule+" (click)="addRule()" ></button>
 <button pButton label="Save game" (click)="saveGame()" ></button>

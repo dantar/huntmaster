@@ -1,6 +1,32 @@
-<div (click)="opEffect.toggle($event, vEffect)">Effect: <span #vEffect>{{effect.code}}</span></div>
-<p-overlayPanel #opEffect>
-  <div *ngFor="let code of effects">
-    <p-radioButton name="effect" value="{{code}}" [label]="code" [(ngModel)]="effect.code"></p-radioButton>
-  </div>
-</p-overlayPanel>
+<div class="effect">
+  <span #vEffectCode (click)="opEffectCode.toggle($event, vEffectCode)">{{effect.code || '-change-'}}</span>
+  <p-overlayPanel #opEffectCode>
+    <div *ngFor="let code of effects">
+      <p-radioButton name="effect" value="{{code}}" [label]="code" [(ngModel)]="effect.code"></p-radioButton>
+    </div>
+  </p-overlayPanel>
+  <span *ngIf="effect.code === 'end'">
+    game!
+  </span>
+  <span *ngIf="effect.code === 'sound'">
+    <span #vEffectSound (click)="opEffectSound.toggle($event, vEffect)">{{effect.sound || '-choose-'}}</span>
+    <p-overlayPanel #opEffectSound>
+      <div *ngFor="let sound of sounds">
+        <p-radioButton name="sound" value="{{sound}}" [label]="sound" [(ngModel)]="effect.sound"></p-radioButton>
+      </div>
+    </p-overlayPanel>
+  </span>
+  <span *ngIf="effect.code === 'many'">
+    effects as follows:
+    <div *ngFor="let e of effect.list">
+      <div app-view-effect [effect]="e"></div>
+      <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
+    </div>
+    <div>
+      <button pButton label="(+)" (click)="addEffectToList()" ></button>
+    </div>
+  </span>
+  <span *ngIf="effect.code === 'message'">
+    <textarea [(ngModel)]="effect.text"></textarea>
+  </span>
+</div>

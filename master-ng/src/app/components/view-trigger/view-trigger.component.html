@@ -4,3 +4,13 @@
     <p-radioButton name="trigger" value="{{code}}" [label]="code" [(ngModel)]="trigger.code"></p-radioButton>
   </div>
 </p-overlayPanel>
+<div [ngSwitch]="trigger.code">
+  <div *ngSwitchCase="'start'">start</div>
+  <div *ngSwitchCase="'click'"><input type="text" pInput [(ngModel)]="trigger.item" /></div>
+  <div *ngSwitchCase="'with'">
+      <input type="text" pInput [(ngModel)]="trigger.first" /> +
+      <input type="text" pInput [(ngModel)]="trigger.second" />
+  </div>
+  <div *ngSwitchCase="'nomsg'">no message</div>
+  <div *ngSwitchDefault>other...</div>
+</div>

@@ -1,4 +1,4 @@
-import { HuntRules } from './../../models/hunt';
+import { HuntRules, HtClickItem, HtWithItem } from './../../models/hunt';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -13,7 +13,22 @@ export class ViewRuleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
 
+  shortname(): string {
+    let details = '';
+    switch (this.rule.trigger.code) {
+      case 'start':
+        return 'game start';
+      case 'click':
+        return `qr ${(<HtClickItem>this.rule.trigger).item}`;
+      case 'with':
+        return `qr ${(<HtWithItem>this.rule.trigger).first} + ${(<HtWithItem>this.rule.trigger).second}`;
+      case 'nomsg':
+        return 'no message';
+      default:
+        return this.rule.trigger.code;
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { HuntRules, HuntTrigger } from './models/hunt';
+import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem } from './models/hunt';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 import {saveAs} from 'file-saver';
@@ -11,6 +11,7 @@ import {saveAs} from 'file-saver';
 export class AppComponent implements OnInit {
 
   title = 'master-ng';
+  rulefilter = '';
 
   rules: HuntRules[];
 
@@ -39,6 +40,36 @@ export class AppComponent implements OnInit {
   saveGame() {
     const blob = new Blob([JSON.stringify(this.rules)], {type: 'text/json;charset=utf-8'});
     saveAs(blob, 'game.json');
+  }
+
+  filterrule(rule: HuntRules) {
+    if (this.rulefilter.length <= 0) {
+      return true;
+    }
+    if (rule.trigger.code === 'click') {
+      const r = <HtClickItem> rule.trigger;
+      if (!r.item || r.item.indexOf(this.rulefilter) >= 0) {
+        return true;
+      };
+    }
+    if (rule.trigger.code === 'with') {
+      const r = (<HtWithItem> rule.trigger);
+      if (!r.second || !r.first || r.first.indexOf(this.rulefilter) >= 0 || r.second.indexOf(this.rulefilter) >= 0) {
+        return true;
+      };
+    }
+    if (rule.effect.code === 'drop') {
+      const r = (<HcDropItem> rule.effect);
+      if (!r.item || r.item.indexOf(this.rulefilter) >= 0) {
+        return true;
+      };
+    }
+    if (rule.effect.code === 'gain') {
+      const r = (<HcGainItem> rule.effect);
+      if (!r.item || r.item.indexOf(this.rulefilter) >= 0) {
+        return true;
+      };
+    }
   }
 
 }

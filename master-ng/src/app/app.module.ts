@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
+import { FieldsetModule } from 'primeng/fieldset';
+// import { DropdownModule } from 'primeng/dropdown';
 
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {ButtonModule} from 'primeng/button';
@@ -32,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     OverlayPanelModule,
     FileUploadModule,
     HttpClientModule,
+    FieldsetModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
