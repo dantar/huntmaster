@@ -12,18 +12,20 @@
   <button pButton label="Save game" (click)="saveGame()" ></button>
 </div>
 
-<div *ngFor="let rule of rules; let idx = index">
-  <div class="actionpanel">
-    <div class="actions">
-      <fa size="2" name="arrow-circle-up" (click)="moveUpRule(rule)"></fa>
-      <fa size="2" name="arrow-circle-down" (click)="moveDownRule(rule)"></fa>
-      <fa size="2" name="copy" (click)="copyRule(rule)"></fa>
-      <fa size="2" name="scissors" (click)="cutRule(rule)"></fa>
-      <fa size="2" name="trash" (click)="trashRule(rule)"></fa>
-      <fa size="2" name="paste" *ngIf="clipboard" (click)="pasteRule(rule)"></fa>
-      <fa size="2" name="unlock-alt" *ngIf="pinned.indexOf(rule) === -1" (click)="pinned.push(rule)"></fa>
-      <fa size="2" name="lock" *ngIf="pinned.indexOf(rule) > -1" (click)="pinned.splice(pinned.indexOf(rule), 1)"></fa>
+<ng-container *ngFor="let rule of rules; let idx = index">
+  <div *ngIf="filterrule(rule)" >
+    <div class="actionpanel">
+      <div class="actions">
+        <fa size="2" name="arrow-circle-up" (click)="moveUpRule(rule)"></fa>
+        <fa size="2" name="arrow-circle-down" (click)="moveDownRule(rule)"></fa>
+        <fa size="2" name="copy" (click)="copyRule(rule)"></fa>
+        <fa size="2" name="scissors" (click)="cutRule(rule)"></fa>
+        <fa size="2" name="trash" (click)="trashRule(rule)"></fa>
+        <fa size="2" name="paste" *ngIf="clipboard" (click)="pasteRule(rule)"></fa>
+        <fa size="2" name="unlock-alt" *ngIf="pinned.indexOf(rule) === -1" (click)="pinned.push(rule)"></fa>
+        <fa size="2" name="lock" *ngIf="pinned.indexOf(rule) > -1" (click)="pinned.splice(pinned.indexOf(rule), 1)"></fa>
+      </div>
     </div>
+    <div app-view-rule [rule]="rule"></div>
   </div>
-  <div app-view-rule *ngIf="filterrule(rule)" [rule]="rule"></div>
-</div>
+</ng-container>
