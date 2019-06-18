@@ -21,9 +21,9 @@ export class ViewRuleComponent implements OnInit {
       case 'start':
         return 'game start';
       case 'click':
-        return `qr ${(<HtClickItem>this.rule.trigger).item}`;
+        return `${(<HtClickItem>this.rule.trigger).item}`;
       case 'with':
-        return `qr ${(<HtWithItem>this.rule.trigger).first} + ${(<HtWithItem>this.rule.trigger).second}`;
+        return `${(<HtWithItem>this.rule.trigger).first} + ${(<HtWithItem>this.rule.trigger).second}`;
       case 'nomsg':
         return 'no message';
       default:

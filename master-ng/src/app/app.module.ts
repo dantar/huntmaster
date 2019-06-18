@@ -11,6 +11,8 @@ import {ButtonModule} from 'primeng/button';
 import {RadioButtonModule} from 'primeng/radiobutton';
 // import {DropdownModule} from 'primeng/dropdown';
 
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+ 
 import { AppComponent } from './app.component';
 import { ViewRuleComponent } from './components/view-rule/view-rule.component';
 import { ViewTriggerComponent } from './components/view-trigger/view-trigger.component';
@@ -35,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     FileUploadModule,
     HttpClientModule,
     FieldsetModule,
+    Angular2FontawesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

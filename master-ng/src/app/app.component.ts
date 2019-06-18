@@ -14,18 +14,24 @@ export class AppComponent implements OnInit {
   rulefilter = '';
 
   rules: HuntRules[];
+  clipboard: HuntRules;
+  pinned: HuntRules[];
 
   @ViewChild('upload') upload: FileUpload;
 
   ngOnInit(): void {
     this.rules = [];
+    this.pinned = [];
+    this.clipboard = null;
   }
 
   addRule(type: string) {
-    this.rules.push({
+    const rule = {
       trigger: {type: 'trigger', code: 'click'},
       effect: {type: 'consequence', code: 'message'},
-    });
+    };
+    this.rules.push(rule);
+    this.pinned.push(rule);
   }
 
   loadJsonGame(event: any) {
@@ -44,6 +50,9 @@ export class AppComponent implements OnInit {
 
   filterrule(rule: HuntRules) {
     if (this.rulefilter.length <= 0) {
+      return true;
+    }
+    if (this.pinned.indexOf(rule) >= 0) {
       return true;
     }
     if (rule.trigger.code === 'click') {
@@ -70,6 +79,46 @@ export class AppComponent implements OnInit {
         return true;
       };
     }
+    return false;
+  }
+
+  moveUpRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    if (index > 0 && index < this.rules.length) {
+      this.rules.splice(index - 1, 0, this.rules.splice(index, 1)[0]);
+    }
+  }
+
+  moveDownRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    if (index >= 0 && index < this.rules.length - 1) {
+      this.rules.splice(index +1, 0, this.rules.splice(index, 1)[0]);
+    }
+  }
+
+  copyRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    this.rules.splice(index +1, 0, JSON.parse(JSON.stringify(rule)));
+  }
+
+  cutRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    this.clipboard = this.rules.splice(index, 1)[0];
+  }
+
+  pasteRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    this.rules.splice(index +1, 0, this.clipboard);
+    this.clipboard = null;
+  }
+
+  trashRule(rule: HuntRules) {
+    const index = this.rules.indexOf(rule);
+    this.rules.splice(index, 1);
+  }
+
+  trashClipboard() {
+    this.clipboard = null;
   }
 
 }

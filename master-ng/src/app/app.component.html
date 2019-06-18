@@ -5,10 +5,25 @@
   </h1>
 </div>
 
-<input type="text" pInputText [(ngModel)]="rulefilter" />
-<p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
-<ng-container *ngFor="let rule of rules">
+<div>
+  <p-fileUpload #upload mode="basic" name="myfile[]" customUpload="true" (uploadHandler)="loadJsonGame($event)"></p-fileUpload>
+  <input type="text" pInputText [(ngModel)]="rulefilter" />
+  <button pButton label="Rule+" (click)="addRule()" ></button>
+  <button pButton label="Save game" (click)="saveGame()" ></button>
+</div>
+
+<div *ngFor="let rule of rules; let idx = index">
+  <div class="actionpanel">
+    <div class="actions">
+      <fa size="2" name="arrow-circle-up" (click)="moveUpRule(rule)"></fa>
+      <fa size="2" name="arrow-circle-down" (click)="moveDownRule(rule)"></fa>
+      <fa size="2" name="copy" (click)="copyRule(rule)"></fa>
+      <fa size="2" name="scissors" (click)="cutRule(rule)"></fa>
+      <fa size="2" name="trash" (click)="trashRule(rule)"></fa>
+      <fa size="2" name="paste" *ngIf="clipboard" (click)="pasteRule(rule)"></fa>
+      <fa size="2" name="unlock-alt" *ngIf="pinned.indexOf(rule) === -1" (click)="pinned.push(rule)"></fa>
+      <fa size="2" name="lock" *ngIf="pinned.indexOf(rule) > -1" (click)="pinned.splice(pinned.indexOf(rule), 1)"></fa>
+    </div>
+  </div>
   <div app-view-rule *ngIf="filterrule(rule)" [rule]="rule"></div>
-</ng-container>
-<button pButton label="Rule+" (click)="addRule()" ></button>
-<button pButton label="Save game" (click)="saveGame()" ></button>
+</div>
