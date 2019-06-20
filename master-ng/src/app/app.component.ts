@@ -22,14 +22,14 @@ export class AppComponent implements OnInit {
   loadJsonGame(event: any) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.game.setRules(JSON.parse(reader.result as string));
+      this.game.setGame(JSON.parse(reader.result as string));
       this.upload.clear();
     };
     reader.readAsText(event.files[0]);
   }
 
   saveGame() {
-    const blob = new Blob([JSON.stringify(this.game.getRules())], {type: 'text/json;charset=utf-8'});
+    const blob = new Blob([JSON.stringify(this.game.getGame())], {type: 'text/json;charset=utf-8'});
     saveAs(blob, 'game.json');
   }
 

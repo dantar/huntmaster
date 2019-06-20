@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence } from '../models/hunt';
+import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence, HuntGame } from '../models/hunt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
+  game: HuntGame;
   rules: HuntRules[];
   clipboard: HuntRules;
   pinned: HuntRules[];
@@ -26,12 +27,13 @@ export class GameService {
     this.pinned.push(rule);
   }
 
-  getRules(): HuntRules[] {
-    return this.rules;
+  getGame(): HuntGame {
+    return this.game;
   }
 
-  setRules(rules: HuntRules[]) {
-    this.rules = rules;
+  setGame(game: HuntGame) {
+    this.game = game;
+    this.rules = game.rules;
   }
 
   allitems(): string[] {

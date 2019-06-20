@@ -1,6 +1,7 @@
 export class HuntGame {
   name: string;
   title: string;
+  version: number;
   rules: HuntRules[];
 }
 

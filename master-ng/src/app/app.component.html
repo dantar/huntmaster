@@ -12,6 +12,12 @@
   <button pButton label="Save game" (click)="saveGame()" ></button>
 </div>
 
+<div *ngIf="game.game">
+  <input type="text" pInputText [(ngModel)]="game.game.name" />
+  <input type="text" pInputText [(ngModel)]="game.game.title" />
+  <input type="number" pInputText [(ngModel)]="game.game.version" />
+</div>
+
 <ng-container *ngFor="let rule of game.rules; let idx = index">
   <div *ngIf="game.filterrule(rule)" >
     <div class="actionpanel">
