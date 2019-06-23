@@ -1,0 +1,13 @@
+<div class="condition" *ngIf="condition">
+  <span #vConditionCode (click)="opConditionCode.toggle($event, vConditionCode)">{{condition.code || '-change-'}}</span>
+  <p-overlayPanel #opConditionCode>
+    <div *ngFor="let code of conditions">
+      <p-radioButton name="condition" value="{{code}}" [label]="code" [(ngModel)]="condition.code"></p-radioButton>
+    </div>
+  </p-overlayPanel>
+  <ng-container [ngSwitch]="condition.code">
+    <span *ngSwitchCase="'have'">
+      <input type="text" pInput [(ngModel)]="condition.item" />
+    </span>
+  </ng-container>
+</div>

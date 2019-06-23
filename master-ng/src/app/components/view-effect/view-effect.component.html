@@ -5,28 +5,39 @@
       <p-radioButton name="effect" value="{{code}}" [label]="code" [(ngModel)]="effect.code"></p-radioButton>
     </div>
   </p-overlayPanel>
-  <span *ngIf="effect.code === 'end'">
-    game!
-  </span>
-  <span *ngIf="effect.code === 'sound'">
-    <span #vEffectSound (click)="opEffectSound.toggle($event, vEffect)">{{effect.sound || '-choose-'}}</span>
-    <p-overlayPanel #opEffectSound>
-      <div *ngFor="let sound of sounds">
-        <p-radioButton name="sound" value="{{sound}}" [label]="sound" [(ngModel)]="effect.sound"></p-radioButton>
+  <ng-container [ngSwitch]="effect.code">
+    <span *ngSwitchCase="'end'">
+      game!
+    </span>
+    <span *ngSwitchCase="'sound'">
+      <span #vEffectSound (click)="opEffectSound.toggle($event, vEffect)">{{effect.sound || '-choose-'}}</span>
+      <p-overlayPanel #opEffectSound>
+        <div *ngFor="let sound of sounds">
+          <p-radioButton name="sound" value="{{sound}}" [label]="sound" [(ngModel)]="effect.sound"></p-radioButton>
+        </div>
+      </p-overlayPanel>
+    </span>
+    <span *ngSwitchCase="'many'">
+      effects as follows:
+      <div *ngFor="let e of effect.list">
+        <div app-view-effect [effect]="e"></div>
+        <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
       </div>
-    </p-overlayPanel>
-  </span>
-  <span *ngIf="effect.code === 'many'">
-    effects as follows:
-    <div *ngFor="let e of effect.list">
-      <div app-view-effect [effect]="e"></div>
-      <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
-    </div>
-    <div>
-      <button pButton label="(+)" (click)="addEffectToList()" ></button>
-    </div>
-  </span>
-  <span *ngIf="effect.code === 'message'">
-    <textarea [(ngModel)]="effect.text"></textarea>
-  </span>
+      <div>
+        <button pButton label="(+)" (click)="addEffectToList()" ></button>
+      </div>
+    </span>
+    <span *ngSwitchCase="'message'">
+      <textarea [(ngModel)]="effect.text"></textarea>
+    </span>
+    <span *ngSwitchCase="'when'">
+      <div app-view-condition [condition]="newWhenCondition()"></div>
+      <div app-view-effect [effect]="newWhenEffect()"></div>
+    </span>
+    <span *ngSwitchCase="'gain'">
+      <input type="text" pInput [(ngModel)]="effect.item" />
+    </span>
+  </ng-container>
+
+
 </div>

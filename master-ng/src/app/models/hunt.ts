@@ -42,6 +42,22 @@ export class HuntItem extends TypedBase {
   }
 }
 
+// CONDITIONS
+
+export class HuntCondition extends TypedBase {
+  type: string = 'condition';
+  code: string;
+}
+
+export class HcHaveItem extends HuntCondition {
+  code: string = 'have';
+  item: string;
+  constructor(item: string) {
+    super();
+    this.item = item;
+  }
+}
+
 // Hunt TRIGGERS
 
 export class HuntTrigger extends TypedBase {
@@ -86,6 +102,11 @@ export class HuntConsequence extends TypedBase {
   code: string;
 }
 
+export class HcWhenThen extends HuntConsequence {
+  code: string = 'when';
+  condition: HuntCondition;
+  effect: HuntConsequence;
+}
 
 export class HcEndGame extends HuntConsequence {
   code = 'end';

@@ -19,13 +19,15 @@ import { ViewTriggerComponent } from './components/view-trigger/view-trigger.com
 import { ViewEffectComponent } from './components/view-effect/view-effect.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameService } from './services/game.service';
+import { ViewConditionComponent } from './components/view-condition/view-condition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewRuleComponent,
     ViewTriggerComponent,
-    ViewEffectComponent
+    ViewEffectComponent,
+    ViewConditionComponent
   ],
   imports: [
     BrowserModule,

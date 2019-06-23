@@ -1,5 +1,5 @@
-import { HuntConsequence, HcMany } from './../../models/hunt';
-import { Component, OnInit, Input } from '@angular/core';
+import { HuntConsequence, HcMany, HcWhenThen, HuntCondition } from './../../models/hunt';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-view-effect,[app-view-effect]',
@@ -9,12 +9,28 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ViewEffectComponent implements OnInit {
 
   @Input() effect: HuntConsequence;
-  effects = ['end', 'sound', 'gain', 'score', 'drop', 'message', 'once', 'many'];
-  sounds = ['applause'];
+  effects = [
+    'many',
+    'message', 
+    'gain', 
+    'score', 
+    'drop', 
+    'when', 
+    'once', 
+    'sound', 
+    'end', 
+  ];
+  sounds = [
+    'applause',
+    'click',
+  ];
 
   constructor() { }
 
   ngOnInit() {
+    if (!this.effect) {
+      this.effect = new HuntConsequence();
+    }
   }
 
   addEffectToList() {
@@ -23,6 +39,18 @@ export class ViewEffectComponent implements OnInit {
       e.list = [];
     }
     e.list.push(new HuntConsequence());
+  }
+
+  newWhenCondition(): HuntCondition {
+    const e = this.effect as HcWhenThen;
+    e.condition = e.condition ? e.condition : new HuntCondition();
+    return e.condition;
+  }
+
+  newWhenEffect(): HuntConsequence {
+    const e = this.effect as HcWhenThen;
+    e.effect = e.effect ? e.effect : new HuntConsequence();
+    return e.effect;
   }
 
 }

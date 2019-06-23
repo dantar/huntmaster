@@ -13,7 +13,12 @@ export class GameService {
   rulefilter = '';
 
   constructor() { 
-    this.rules = [];
+    this.setGame({
+      name: 'untitled',
+      title: 'The game title',
+      rules: [],
+      version: 1,
+    });
     this.pinned = [];
     this.clipboard = null;
   }  
