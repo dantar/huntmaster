@@ -1,4 +1,4 @@
-import { HuntConsequence, HcMany, HcWhenThen, HuntCondition } from './../../models/hunt';
+import { HuntConsequence, HcMany, HcWhenThen, HuntCondition, HcOnce } from './../../models/hunt';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
@@ -51,6 +51,18 @@ export class ViewEffectComponent implements OnInit {
     const e = this.effect as HcWhenThen;
     e.effect = e.effect ? e.effect : new HuntConsequence();
     return e.effect;
+  }
+
+  newOnceFirst(): HuntConsequence {
+    const e = this.effect as HcOnce;
+    e.first = e.first ? e.first : new HuntConsequence();
+    return e.first;
+  }
+
+  newOnceOthers(): HuntConsequence {
+    const e = this.effect as HcOnce;
+    e.others = e.others ? e.others : new HuntConsequence();
+    return e.others;
   }
 
 }

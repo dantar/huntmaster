@@ -18,13 +18,10 @@
       </p-overlayPanel>
     </span>
     <span *ngSwitchCase="'many'">
-      effects as follows:
+      effects as follows <button pButton label="(+)" (click)="addEffectToList()" ></button>:
       <div *ngFor="let e of effect.list">
         <div app-view-effect [effect]="e"></div>
         <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
-      </div>
-      <div>
-        <button pButton label="(+)" (click)="addEffectToList()" ></button>
       </div>
     </span>
     <span *ngSwitchCase="'message'">
@@ -40,6 +37,14 @@
     <span *ngSwitchCase="'score'">
       <input type="text" pInput [(ngModel)]="effect.item" />
       <input type="number" pInput [(ngModel)]="effect.value" />
+    </span>
+    <span *ngSwitchCase="'drop'">
+      <input type="text" pInput [(ngModel)]="effect.item" />
+    </span>
+    <span *ngSwitchCase="'once'">
+      <input type="text" pInput [(ngModel)]="effect.item" />
+      <div app-view-effect [effect]="newOnceFirst()"></div>
+      <div app-view-effect [effect]="newOnceOthers()"></div>
     </span>
   </ng-container>
 
