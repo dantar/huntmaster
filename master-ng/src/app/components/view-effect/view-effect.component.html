@@ -37,6 +37,10 @@
     <span *ngSwitchCase="'gain'">
       <input type="text" pInput [(ngModel)]="effect.item" />
     </span>
+    <span *ngSwitchCase="'score'">
+      <input type="text" pInput [(ngModel)]="effect.item" />
+      <input type="number" pInput [(ngModel)]="effect.value" />
+    </span>
   </ng-container>
 
 
