@@ -9,5 +9,21 @@
     <span *ngSwitchCase="'have'">
       <input type="text" pInput [(ngModel)]="condition.item" />
     </span>
+    <span *ngSwitchCase="'range'">
+      <input type="text" pInput [(ngModel)]="condition.item" />
+      <input type="number" pInput [(ngModel)]="condition.minval" />
+      <input type="number" pInput [(ngModel)]="condition.maxval" />
+    </span>
+    <span *ngSwitchCase="'and'">
+      <div app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></div>
+      <button pButton label="(+)" (click)="addConditionToList()" ></button>
+    </span>
+    <span *ngSwitchCase="'or'">
+      <div app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></div>
+      <button pButton label="(+)" (click)="addConditionToList()" ></button>
+    </span>
+    <span *ngSwitchCase="'not'">
+      <div app-view-condition [condition]="condition.condition"></div>
+    </span>
   </ng-container>
 </div>

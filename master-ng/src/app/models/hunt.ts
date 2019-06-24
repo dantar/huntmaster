@@ -58,6 +58,31 @@ export class HcHaveItem extends HuntCondition {
   }
 }
 
+export class HcListLogicOperator extends HuntCondition {
+  conditions: HuntCondition[];
+  constructor(conditions: HuntCondition[]) {
+    super();
+    this.conditions = conditions;
+  }
+}
+
+export class HcAndOf extends HcListLogicOperator {
+  code: string = 'and';
+}
+
+export class HcOrOf extends HcListLogicOperator {
+  code: string = 'or';
+}
+
+export class HcNotOf extends HuntCondition {
+  condition: HuntCondition;
+  constructor(condition: HuntCondition) {
+    super();
+    this.condition = condition;
+  }
+}
+
+
 // Hunt TRIGGERS
 
 export class HuntTrigger extends TypedBase {
