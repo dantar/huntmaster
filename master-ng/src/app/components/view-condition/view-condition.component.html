@@ -1,4 +1,4 @@
-<div class="condition" *ngIf="condition">
+<span class="condition" *ngIf="condition">
   <span #vConditionCode (click)="opConditionCode.toggle($event, vConditionCode)">{{condition.code || '-change-'}}</span>
   <p-overlayPanel #opConditionCode>
     <div *ngFor="let code of conditions">
@@ -10,20 +10,21 @@
       <input type="text" pInput [(ngModel)]="condition.item" />
     </span>
     <span *ngSwitchCase="'range'">
-      <input type="text" pInput [(ngModel)]="condition.item" />
-      <input type="number" pInput [(ngModel)]="condition.minval" />
-      <input type="number" pInput [(ngModel)]="condition.maxval" />
+      item <input type="text" pInput [(ngModel)]="condition.item" />
+      min <input type="number" pInput [(ngModel)]="condition.minval" />
+      max <input type="number" pInput [(ngModel)]="condition.maxval" />
     </span>
     <span *ngSwitchCase="'and'">
-      <div app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></div>
-      <button pButton label="(+)" (click)="addConditionToList()" ></button>
+      (<span app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></span>
+      <fa size="1" name="plus-circle" (click)="addConditionToList()"></fa>)
     </span>
     <span *ngSwitchCase="'or'">
-      <div app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></div>
-      <button pButton label="(+)" (click)="addConditionToList()" ></button>
+      (<span app-view-condition *ngFor="let c of getConditionList()" [condition]="c"></span>
+      <fa size="1" name="plus-circle" (click)="addConditionToList()"></fa>)
+      )
     </span>
     <span *ngSwitchCase="'not'">
-      <div app-view-condition [condition]="condition.condition"></div>
+      <span app-view-condition [condition]="condition.condition"></span>
     </span>
   </ng-container>
-</div>
+</span>
