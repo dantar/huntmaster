@@ -1,5 +1,6 @@
 import { HuntConsequence, HcMany, HcWhenThen, HuntCondition, HcOnce } from './../../models/hunt';
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-view-effect,[app-view-effect]',
@@ -9,23 +10,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 export class ViewEffectComponent implements OnInit {
 
   @Input() effect: HuntConsequence;
-  effects = [
-    'many',
-    'message', 
-    'gain', 
-    'score', 
-    'drop', 
-    'when', 
-    'once', 
-    'sound', 
-    'end', 
-  ];
-  sounds = [
-    'applause',
-    'click',
-  ];
 
-  constructor() { }
+  constructor(public game: GameService) { }
 
   ngOnInit() {
     if (!this.effect) {

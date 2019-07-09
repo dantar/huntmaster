@@ -1,48 +1,40 @@
 <div class="effect">
-  <span #vEffectCode (click)="opEffectCode.toggle($event, vEffectCode)">{{effect.code || '-change-'}}</span>
-  <p-overlayPanel #opEffectCode>
-    <div *ngFor="let code of effects">
-      <p-radioButton name="effect" value="{{code}}" [label]="code" [(ngModel)]="effect.code"></p-radioButton>
-    </div>
-  </p-overlayPanel>
   <ng-container [ngSwitch]="effect.code">
     <span *ngSwitchCase="'end'">
       game!
     </span>
     <span *ngSwitchCase="'sound'">
-      <span #vEffectSound (click)="opEffectSound.toggle($event, vEffect)">{{effect.sound || '-choose-'}}</span>
+      Play <span #vEffectSound (click)="opEffectSound.toggle($event, vEffect)">{{effect.sound || '-choose-'}}</span>
       <p-overlayPanel #opEffectSound>
-        <div *ngFor="let sound of sounds">
+        <div *ngFor="let sound of game.sounds">
           <p-radioButton name="sound" value="{{sound}}" [label]="sound" [(ngModel)]="effect.sound"></p-radioButton>
         </div>
       </p-overlayPanel>
     </span>
     <span *ngSwitchCase="'many'">
-      effects as follows <button pButton label="(+)" (click)="addEffectToList()" ></button>:
       <div *ngFor="let e of effect.list">
         <div app-view-effect [effect]="e"></div>
         <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
       </div>
     </span>
     <span *ngSwitchCase="'message'">
-      <textarea [(ngModel)]="effect.text"></textarea>
+      message <textarea [(ngModel)]="effect.text"></textarea>
     </span>
     <span *ngSwitchCase="'when'">
-      <div app-view-condition [condition]="newWhenCondition()"></div>
-      <div app-view-effect [effect]="newWhenEffect()"></div>
+      when <div app-view-condition [condition]="newWhenCondition()"></div>
+      then <div app-view-effect [effect]="newWhenEffect()"></div>
     </span>
     <span *ngSwitchCase="'gain'">
-      <input type="text" pInput [(ngModel)]="effect.item" />
+      gain <input type="text" pInput [(ngModel)]="effect.item" />
     </span>
     <span *ngSwitchCase="'score'">
-      <input type="text" pInput [(ngModel)]="effect.item" />
-      <input type="number" pInput [(ngModel)]="effect.value" />
+      score <input type="text" pInput [(ngModel)]="effect.item" /> <input type="number" pInput [(ngModel)]="effect.value" />
     </span>
     <span *ngSwitchCase="'drop'">
-      <input type="text" pInput [(ngModel)]="effect.item" />
+      drop <input type="text" pInput [(ngModel)]="effect.item" />
     </span>
     <span *ngSwitchCase="'once'">
-      <input type="text" pInput [(ngModel)]="effect.item" />
+      once <input type="text" pInput [(ngModel)]="effect.item" />
       <div app-view-effect [effect]="newOnceFirst()"></div>
       <div app-view-effect [effect]="newOnceOthers()"></div>
     </span>

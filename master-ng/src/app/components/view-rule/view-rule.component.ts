@@ -1,5 +1,6 @@
-import { HuntRules, HtClickItem, HtWithItem } from './../../models/hunt';
+import { HuntRules, HtClickItem, HtWithItem, HcMessage, HcMany, HuntConsequence } from './../../models/hunt';
 import { Component, OnInit, Input } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-view-rule,[app-view-rule]',
@@ -10,7 +11,7 @@ export class ViewRuleComponent implements OnInit {
 
   @Input() rule: HuntRules;
 
-  constructor() { }
+  constructor(public game: GameService) { }
 
   ngOnInit() {
   }

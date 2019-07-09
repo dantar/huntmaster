@@ -9,7 +9,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ViewTriggerComponent implements OnInit {
 
   @Input() trigger: HuntTrigger;
-  triggers = ['start', 'click', 'with', 'nomsg'];
 
   constructor() { }
 

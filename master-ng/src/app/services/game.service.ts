@@ -12,6 +12,28 @@ export class GameService {
   pinned: HuntRules[];
   rulefilter = '';
 
+  effects = [
+    'many',
+    'message', 
+    'gain', 
+    'score', 
+    'drop', 
+    'when', 
+    'once', 
+    'sound', 
+    'end', 
+  ];
+  sounds = [
+    'applause',
+    'click',
+  ];
+  triggers = [
+    'start', 
+    'click', 
+    'with', 
+    'nomsg'];
+
+
   constructor() { 
     this.setGame({
       name: 'untitled',
@@ -23,9 +45,9 @@ export class GameService {
     this.clipboard = null;
   }  
 
-  addRule(type: string) {
+  addRule(code: string) {
     const rule = {
-      trigger: {type: 'trigger', code: 'click'},
+      trigger: {type: 'trigger', code: code},
       effect: {type: 'consequence', code: 'message'},
     };
     this.rules.push(rule);
@@ -92,6 +114,21 @@ export class GameService {
       };
     }
     return false;
+  }
+
+  addEffect(previous: HuntConsequence, code: string): HuntConsequence {
+    const effect = new HuntConsequence();
+    effect.code = code;
+    if (previous) {
+      if (previous.code === 'many') {
+        (previous as HcMany).list.push(effect);
+        return previous;
+      } else {
+        return new HcMany([previous, effect]);
+      }
+    } else {
+      return effect;
+    }
   }
 
   moveUpRule(rule: HuntRules) {
