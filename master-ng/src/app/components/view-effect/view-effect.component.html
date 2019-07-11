@@ -1,3 +1,8 @@
+<div class="actionpanel" *ngIf="effect.code != 'many'">
+  <div class="actions">
+    <fa size="1" name="trash" (click)="trash.emit(effect)"></fa>
+  </div>
+</div>
 <div class="effect">
   <ng-container [ngSwitch]="effect.code">
     <span *ngSwitchCase="'end'">
@@ -12,9 +17,9 @@
       </p-overlayPanel>
     </span>
     <span *ngSwitchCase="'many'">
+      <div>Many effects</div>
       <div *ngFor="let e of effect.list">
-        <div app-view-effect [effect]="e"></div>
-        <div><button pButton label="(-)" (click)="effect.list.splice(effect.list.indexOf(e), 1)" ></button></div>
+        <div app-view-effect [effect]="e" (trash)="effect.list.splice(effect.list.indexOf(e), 1)"></div>
       </div>
     </span>
     <span *ngSwitchCase="'message'">
@@ -39,6 +44,4 @@
       <div app-view-effect [effect]="newOnceOthers()"></div>
     </span>
   </ng-container>
-
-
 </div>

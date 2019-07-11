@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+.actionpanel {
+    float: right;
+    .actions {
+        position: absolute;
+        right: 30px;
+        padding: 10px;
+        fa {
+            padding: 2px;
+        }
+    }
+}
+
+.ui-fieldset-content-wrapper-overflown {
+    .actionpanel {
+        display: none;
+    }
+}
+
+

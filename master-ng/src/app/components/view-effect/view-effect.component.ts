@@ -10,6 +10,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ViewEffectComponent implements OnInit {
 
   @Input() effect: HuntConsequence;
+  @Output() trash = new EventEmitter<HuntConsequence>();
 
   constructor(public game: GameService) { }
 
