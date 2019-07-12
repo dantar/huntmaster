@@ -34,10 +34,4 @@ export class ViewEffectComponent implements OnInit {
     return e.condition;
   }
 
-  newWhenEffect(): HuntConsequence {
-    const e = this.effect as HcWhenThen;
-    e.effect = e.effect ? e.effect : new HuntConsequence();
-    return e.effect;
-  }
-
 }
