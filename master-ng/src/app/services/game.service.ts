@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence, HuntGame, HuntCondition, HcListLogicOperator, HcAndOf, HcOrOf, HcHaveItem, HcNotOf, HcRangeScore } from '../models/hunt';
+import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence, HuntGame, HuntCondition, HcListLogicOperator, HcAndOf, HcOrOf, HcHaveItem, HcNotOf, HcRangeScore, HcWhenThen, HcSound, HcGainCountable, HcMessage, HcOnce } from '../models/hunt';
 
 @Injectable({
   providedIn: 'root'
