@@ -41,8 +41,10 @@
     </span>
     <span *ngSwitchCase="'once'">
       once <input type="text" pInput [(ngModel)]="effect.item" />
-      <div app-view-effect [effect]="newOnceFirst()"></div>
-      <div app-view-effect [effect]="newOnceOthers()"></div>
+      <div app-view-effect [effect]="effect.first"></div>
+      <div app-add-effect [effect]="effect.first" (updateEffect)="effect.first = $event"></div>
+      <div app-view-effect [effect]="effect.others"></div>
+      <div app-add-effect [effect]="effect.others" (updateEffect)="effect.others = $event"></div>
     </span>
   </ng-container>
 </div>

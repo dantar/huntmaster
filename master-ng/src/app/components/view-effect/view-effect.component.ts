@@ -40,16 +40,4 @@ export class ViewEffectComponent implements OnInit {
     return e.effect;
   }
 
-  newOnceFirst(): HuntConsequence {
-    const e = this.effect as HcOnce;
-    e.first = e.first ? e.first : new HuntConsequence();
-    return e.first;
-  }
-
-  newOnceOthers(): HuntConsequence {
-    const e = this.effect as HcOnce;
-    e.others = e.others ? e.others : new HuntConsequence();
-    return e.others;
-  }
-
 }
