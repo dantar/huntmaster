@@ -27,7 +27,8 @@
     </span>
     <span *ngSwitchCase="'when'">
       when <div app-view-condition [condition]="newWhenCondition()"></div>
-      then <div app-view-effect [effect]="newWhenEffect()"></div>
+      then <div app-view-effect [effect]="effect.effect"></div>
+      <div app-add-effect [effect]="effect.effect" (updateEffect)="effect.effect = $event"></div>
     </span>
     <span *ngSwitchCase="'gain'">
       gain <input type="text" pInput [(ngModel)]="effect.item" />
