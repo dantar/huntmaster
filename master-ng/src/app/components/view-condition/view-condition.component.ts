@@ -9,8 +9,6 @@ import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/rende
 })
 export class ViewConditionComponent implements OnInit {
 
-  conditions = ['have', 'range', 'and', 'or', 'not'];
-
   @Input() condition: HuntCondition;
 
   constructor() {
@@ -20,26 +18,6 @@ export class ViewConditionComponent implements OnInit {
     if (!this.condition) {
       this.condition = new HuntCondition();
     }
-  }
-
-  getConditionList(): HuntCondition[] {
-    let c = this.condition as HcListLogicOperator;
-    if (! c.conditions) {
-      c.conditions = [];
-    }
-    return c.conditions;
-  }
-
-  addConditionToList() {
-    this.getConditionList().push({type: 'condition', code: 'have'});
-  }
-
-  getConditionOf(): HuntCondition {
-    let c = this.condition as HcNotOf;
-    if (! c.condition) {
-      c.condition = {type: 'condition', code: 'have'};
-    }
-    return c.condition;
   }
 
 }

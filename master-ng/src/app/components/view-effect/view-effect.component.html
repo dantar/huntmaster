@@ -26,7 +26,8 @@
       message <textarea [(ngModel)]="effect.text"></textarea>
     </span>
     <span *ngSwitchCase="'when'">
-      when <div app-view-condition [condition]="newWhenCondition()"></div>
+      when <div app-view-condition [condition]="effect.condition"></div>
+      <div app-add-condition [condition]="effect.condition" (replace)="effect.condition = $event"></div>
       then <div app-view-effect [effect]="effect.effect"></div>
       <div app-add-effect [effect]="effect.effect" (updateEffect)="effect.effect = $event"></div>
     </span>

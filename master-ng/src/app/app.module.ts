@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GameService } from './services/game.service';
 import { ViewConditionComponent } from './components/view-condition/view-condition.component';
 import { AddEffectComponent } from './components/add-effect/add-effect.component';
+import { AddConditionComponent } from './components/add-condition/add-condition.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AddEffectComponent } from './components/add-effect/add-effect.component
     ViewTriggerComponent,
     ViewEffectComponent,
     ViewConditionComponent,
-    AddEffectComponent
+    AddEffectComponent,
+    AddConditionComponent
   ],
   imports: [
     BrowserModule,

@@ -58,8 +58,21 @@ export class HcHaveItem extends HuntCondition {
   }
 }
 
+export class HcRangeScore extends HuntCondition {
+  code: string = 'range';
+  item: string;
+  minval: number;
+  maxval: number;
+  constructor(item: string, minval: number, maxval: number) {
+    super();
+    this.item = item;
+    this.minval = minval;
+    this.maxval = maxval;
+  }
+}
+
 export class HcListLogicOperator extends HuntCondition {
-  conditions: HuntCondition[];
+  conditions: HuntCondition[] = [];
   constructor(conditions: HuntCondition[]) {
     super();
     this.conditions = conditions;
@@ -68,6 +81,9 @@ export class HcListLogicOperator extends HuntCondition {
 
 export class HcAndOf extends HcListLogicOperator {
   code: string = 'and';
+  constructor(conditions: HuntCondition[]) {
+    super(conditions);
+  }
 }
 
 export class HcOrOf extends HcListLogicOperator {
@@ -75,6 +91,7 @@ export class HcOrOf extends HcListLogicOperator {
 }
 
 export class HcNotOf extends HuntCondition {
+  code: string = 'not';
   condition: HuntCondition;
   constructor(condition: HuntCondition) {
     super();

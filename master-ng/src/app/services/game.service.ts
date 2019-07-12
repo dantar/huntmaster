@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence, HuntGame } from '../models/hunt';
+import { HuntRules, HuntTrigger, HtClickItem, HtWithItem, HcDropItem, HcGainItem, HcMany, HuntConsequence, HuntGame, HuntCondition, HcListLogicOperator, HcAndOf, HcOrOf, HcHaveItem, HcNotOf, HcRangeScore } from '../models/hunt';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,8 @@ export class GameService {
     'click', 
     'with', 
     'nomsg'];
+
+  conditions = ['have', 'range', 'and', 'or', 'not'];
 
 
   constructor() { 
@@ -128,6 +130,53 @@ export class GameService {
       }
     } else {
       return effect;
+    }
+  }
+
+  toggleCondition(condition: HuntCondition) {
+    switch (condition.code) {
+      case 'and':
+        condition.code = 'or';
+        break;
+      case 'or':
+        condition.code = 'and';
+        break;
+      default:
+        break;
+    }
+  }
+
+  newCondition(code: string): HuntCondition {
+    switch (code) {
+      case 'have':
+        return new HcHaveItem(null);
+      case 'range':
+          return new HcRangeScore(null, null, null);
+      case 'and':
+        return new HcAndOf([]);
+      case 'or':
+        return new HcOrOf([]);
+      case 'not':
+        return new HcNotOf(null);
+    }
+  }
+
+  addCondition(previous: HuntCondition, code: string): HuntCondition {
+    const condition = this.newCondition(code);
+    if (previous) {
+      switch (previous.code) {
+        case 'or':
+        case 'and':
+          (previous as HcListLogicOperator).conditions.push(condition);
+          return previous
+        case 'not':
+          (previous as HcNotOf).condition = condition;
+          return previous;
+        default:
+          return new HcAndOf([previous, condition]);
+      }
+    } else {
+      return condition;
     }
   }
 

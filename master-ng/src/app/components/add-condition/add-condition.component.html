@@ -1,0 +1,6 @@
+<a #vConditionCode (click)="opConditionCode.toggle($event, vConditionCode)"><fa name="plus-circle"></fa></a>
+<p-overlayPanel #opConditionCode>
+  <div *ngFor="let code of game.conditions">
+    <a (click)="replace.emit(game.addCondition(condition, code))">{{code}}</a>
+  </div>
+</p-overlayPanel>
