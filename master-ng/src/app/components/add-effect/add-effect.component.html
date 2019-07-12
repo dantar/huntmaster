@@ -1,7 +1,7 @@
 <a (click)="opEffectCode.toggle($event)"><fa name="plus-circle"></fa></a>
 <p-overlayPanel #opEffectCode>
   <div *ngFor="let code of game.effects">
-    <a (click)="updateEffect.emit(game.addEffect(effect, code))">{{code}}</a>
+    <a (click)="replace.emit(game.addEffect(effect, code))">{{code}}</a>
   </div>
 </p-overlayPanel>
 

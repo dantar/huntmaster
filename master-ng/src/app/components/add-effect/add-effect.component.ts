@@ -10,7 +10,7 @@ import { HuntConsequence } from 'src/app/models/hunt';
 export class AddEffectComponent implements OnInit {
 
   @Input() effect: HuntConsequence;
-  @Output() updateEffect = new EventEmitter<HuntConsequence>();
+  @Output() replace = new EventEmitter<HuntConsequence>();
 
   constructor(public game: GameService) { }
 

@@ -3,7 +3,7 @@
     <div class="trigger" app-view-trigger [trigger]="rule.trigger"></div>
     <div *ngIf="rule.effect" class="effect" app-view-effect [effect]="rule.effect"></div>
     <div>
-      <a app-add-effect [effect]="rule.effect" (updateEffect)="rule.effect = $event"></a>
+      <a app-add-effect [effect]="rule.effect" (replace)="rule.effect = $event"></a>
     </div>
   </div>
 </p-fieldset>

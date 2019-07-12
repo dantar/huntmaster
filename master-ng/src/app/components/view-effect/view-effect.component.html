@@ -29,7 +29,7 @@
       when <div app-view-condition [condition]="effect.condition"></div>
       <div app-add-condition [condition]="effect.condition" (replace)="effect.condition = $event"></div>
       then <div app-view-effect [effect]="effect.effect"></div>
-      <div app-add-effect [effect]="effect.effect" (updateEffect)="effect.effect = $event"></div>
+      <div app-add-effect [effect]="effect.effect" (replace)="effect.effect = $event"></div>
     </span>
     <span *ngSwitchCase="'gain'">
       gain <input type="text" pInput [(ngModel)]="effect.item" />
@@ -43,9 +43,9 @@
     <span *ngSwitchCase="'once'">
       once <input type="text" pInput [(ngModel)]="effect.item" />
       <div app-view-effect [effect]="effect.first"></div>
-      <div app-add-effect [effect]="effect.first" (updateEffect)="effect.first = $event"></div>
+      <div app-add-effect [effect]="effect.first" (replace)="effect.first = $event"></div>
       <div app-view-effect [effect]="effect.others"></div>
-      <div app-add-effect [effect]="effect.others" (updateEffect)="effect.others = $event"></div>
+      <div app-add-effect [effect]="effect.others" (replace)="effect.others = $event"></div>
     </span>
   </ng-container>
 </div>
