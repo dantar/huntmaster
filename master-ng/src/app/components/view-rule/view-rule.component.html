@@ -1,7 +1,7 @@
 <p-fieldset legend="{{shortname()}}" [toggleable]="true" [collapsed]="true">
   <div class="rule">
     <div class="trigger" app-view-trigger [trigger]="rule.trigger"></div>
-    <div *ngIf="rule.effect" class="effect" app-view-effect [effect]="rule.effect"></div>
+    <div *ngIf="rule.effect" class="effect" app-view-effect [effect]="rule.effect" (trash)="rule.effect = null"></div>
     <div>
       <a app-add-effect [effect]="rule.effect" (replace)="rule.effect = $event"></a>
     </div>

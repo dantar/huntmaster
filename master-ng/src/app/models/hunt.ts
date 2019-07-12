@@ -1,3 +1,5 @@
+import { GameService } from '../services/game.service';
+
 export class HuntGame {
   name: string;
   title: string;

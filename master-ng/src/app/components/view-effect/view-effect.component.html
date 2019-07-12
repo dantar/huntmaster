@@ -1,10 +1,6 @@
-<div class="actionpanel" *ngIf="effect.code != 'many'">
-  <div class="actions">
-    <fa size="1" name="trash" (click)="trash.emit(effect)"></fa>
-  </div>
-</div>
-<div class="effect">
+<div class="effect" *ngIf="effect">
   <ng-container [ngSwitch]="effect.code">
+    <a *ngIf="effect" (click)="trash.emit(effect)"><fa name="trash"></fa></a>
     <span *ngSwitchCase="'end'">
       game!
     </span>
@@ -17,7 +13,7 @@
       </p-overlayPanel>
     </span>
     <span *ngSwitchCase="'many'">
-      <div>Many effects</div>
+      <span>many</span>
       <div *ngFor="let e of effect.list">
         <div app-view-effect [effect]="e" (trash)="effect.list.splice(effect.list.indexOf(e), 1)"></div>
       </div>
@@ -26,9 +22,9 @@
       message <textarea [(ngModel)]="effect.text"></textarea>
     </span>
     <span *ngSwitchCase="'when'">
-      when <div app-view-condition [condition]="effect.condition"></div>
+      when <div *ngIf="effect.condition" app-view-condition [condition]="effect.condition"></div>
       <div app-add-condition [condition]="effect.condition" (replace)="effect.condition = $event"></div>
-      then <div app-view-effect [effect]="effect.effect"></div>
+      then <div *ngIf="effect.effect" app-view-effect [effect]="effect.effect" (trash)="effect.effect = null"></div>
       <div app-add-effect [effect]="effect.effect" (replace)="effect.effect = $event"></div>
     </span>
     <span *ngSwitchCase="'gain'">
@@ -42,9 +38,9 @@
     </span>
     <span *ngSwitchCase="'once'">
       once <input type="text" pInput [(ngModel)]="effect.item" />
-      <div app-view-effect [effect]="effect.first"></div>
+      <div app-view-effect [effect]="effect.first" (trash)="effect.first = null"></div>
       <div app-add-effect [effect]="effect.first" (replace)="effect.first = $event"></div>
-      <div app-view-effect [effect]="effect.others"></div>
+      <div app-view-effect [effect]="effect.others" (trash)="effect.others = null"></div>
       <div app-add-effect [effect]="effect.others" (replace)="effect.others = $event"></div>
     </span>
   </ng-container>

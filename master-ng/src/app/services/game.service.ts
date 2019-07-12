@@ -31,7 +31,8 @@ export class GameService {
     'start', 
     'click', 
     'with', 
-    'nomsg'];
+    'nomsg',
+  ];
 
   conditions = ['have', 'range', 'and', 'or', 'not'];
 
@@ -116,6 +117,12 @@ export class GameService {
       };
     }
     return false;
+  }
+
+  static effectFactory: {[code: string]: ()=>HuntConsequence} = {}
+
+  newEffect(code: string): HuntConsequence {
+    return GameService.effectFactory[code]();
   }
 
   addEffect(previous: HuntConsequence, code: string): HuntConsequence {
@@ -220,3 +227,12 @@ export class GameService {
   }
 
 }
+
+GameService.effectFactory['when'] = ()=> new HcWhenThen();
+GameService.effectFactory['sound'] = ()=> new HcSound(null);
+GameService.effectFactory['gain'] = ()=> new HcGainItem(null);
+GameService.effectFactory['score'] = ()=> new HcGainCountable(null, null);
+GameService.effectFactory['drop'] = ()=> new HcDropItem(null);
+GameService.effectFactory['message'] = ()=> new HcMessage('');
+GameService.effectFactory['once'] = ()=> new HcOnce(null, null, null);
+GameService.effectFactory['many'] = ()=> new HcMany([]);
