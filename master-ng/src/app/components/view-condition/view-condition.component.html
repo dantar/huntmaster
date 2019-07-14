@@ -19,7 +19,8 @@
       )
     </span>
     <span *ngSwitchCase="'not'">
-      <span app-view-condition [condition]="condition.condition"></span>
+      not(<span app-view-condition [condition]="condition.condition"></span>
+      <span app-add-condition [condition]="condition.condition" (replace)="condition.condition = $event"></span>)
     </span>
   </ng-container>
 </span>
