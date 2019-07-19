@@ -1,4 +1,4 @@
-<div class="effect" *ngIf="effect">
+<span class="effect" *ngIf="effect">
   <ng-container [ngSwitch]="effect.code">
     <a *ngIf="effect" (click)="trash.emit(effect)"><fa name="trash"></fa></a>
     <span *ngSwitchCase="'end'">
@@ -13,17 +13,16 @@
       </p-overlayPanel>
     </span>
     <span *ngSwitchCase="'many'">
-      <span>many</span>
-      <div *ngFor="let e of effect.list">
-        <div app-view-effect [effect]="e" (trash)="effect.list.splice(effect.list.indexOf(e), 1)"></div>
-      </div>
+      <p-fieldset legend="many" [toggleable]="true" [collapsed]="false">
+        <div *ngFor="let e of effect.list" app-view-effect [effect]="e" (trash)="effect.list.splice(effect.list.indexOf(e), 1)"></div>
+      </p-fieldset>
     </span>
     <span *ngSwitchCase="'message'">
       message <textarea [(ngModel)]="effect.text"></textarea>
     </span>
     <span *ngSwitchCase="'when'">
-      when <div *ngIf="effect.condition" app-view-condition [condition]="effect.condition"></div>
-      <div app-add-condition [condition]="effect.condition" (replace)="effect.condition = $event"></div>
+      when <span *ngIf="effect.condition" app-view-condition [condition]="effect.condition"></span>
+      <span app-add-condition [condition]="effect.condition" (replace)="effect.condition = $event"></span>
       then <div *ngIf="effect.effect" app-view-effect [effect]="effect.effect" (trash)="effect.effect = null"></div>
       <div app-add-effect [effect]="effect.effect" (replace)="effect.effect = $event"></div>
     </span>
@@ -44,4 +43,4 @@
       <div app-add-effect [effect]="effect.others" (replace)="effect.others = $event"></div>
     </span>
   </ng-container>
-</div>
+</span>
